@@ -1,8 +1,7 @@
 const User = require('../api/models/user.model');
 
 const validatePassword = (pass) => {
-    const regex =
-        /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/;
+    const regex = /^[A-Za-z0-9\s]+$/g;
     return regex.test(pass);
 };
 

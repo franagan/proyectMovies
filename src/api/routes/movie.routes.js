@@ -1,4 +1,5 @@
 const express = require('express');
+const upload = require('../../middlewares/upload.file');
 
 const router = express.Router();
 
@@ -11,6 +12,7 @@ const {
     getMovieYear,
     modMovie,
     deleteMovie,
+    postMovie,
 } = require('../controllers/movie.controller');
 
 router.get('/title/:title', getMovieTitle);
@@ -21,5 +23,9 @@ router.delete('/:id', deleteMovie);
 router.get('/movies', getAllMovies);
 router.get('/:id', getMovieId);
 router.post('/', setNewMovie);
-
+router.post('/', upload.single('image'), postMovie);
+/**
+ *
+ *
+ */
 module.exports = router;

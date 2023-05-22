@@ -5,14 +5,19 @@ const moviesSchema = new Schema(
     {
         title: { type: String, required: true },
         director: { type: String, required: true },
-        year: { type: Number },
+        year: { type: Number, required: true },
         genre: { type: String, required: true },
+        image: {
+            type: String,
+            required: false,
+            default: '',
+        },
     },
     {
         timestamp: true,
     },
     {
-        collection: 'movies',
+        collection: 'movie',
     }
 );
 const Movies = mongoose.model('movie', moviesSchema);

@@ -1,5 +1,6 @@
 const { query } = require('express');
 const Movie = require('../models/movie.model');
+const Movies = require('../models/movie.model');
 
 const getAllMovies = async (req, res) => {
     try {
@@ -112,6 +113,22 @@ const deleteMovie = async (req, res) => {
     }
 };
 
+const postMovie = async (req, res) => {
+    try {
+        console.log(req.body);
+        console.log(req.file.path);
+        const newMovie = new Movie(req.body);
+        if (req.file.path) {
+            newMovie.image = req.file.path;
+        }
+        const createdMovie = await newMovie.save();
+
+        return res.status(200).json(createdMovie);
+    } catch (error) {
+        return res.status(400).json(error);
+    }
+};
+
 module.exports = {
     getAllMovies,
     setNewMovie,
@@ -121,4 +138,5 @@ module.exports = {
     getMovieYear,
     modMovie,
     deleteMovie,
+    postMovie,
 };

@@ -6,7 +6,7 @@ const {
     usedEmail,
 } = require('../../utils/validators');
 
-const { generateSign, verifySign } = require('../../utils/jwt');
+const { generateSign } = require('../../utils/jwt');
 
 const login = async (req, res) => {
     try {
@@ -51,4 +51,12 @@ const register = async (req, res) => {
     }
 };
 
-module.exports = { login, register };
+const checkSession = async (req, res) => {
+    try {
+        res.status(200).json(req.user);
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+};
+
+module.exports = { login, register, checkSession };
